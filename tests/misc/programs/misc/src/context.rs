@@ -1,5 +1,7 @@
 use crate::account::*;
 use anchor_lang::prelude::*;
+use anchor_lang::accounts::loader::Loader;
+use anchor_lang::accounts::cpi_state::CpiState;
 use anchor_spl::associated_token::AssociatedToken;
 use anchor_spl::token::{Mint, Token, TokenAccount};
 use misc2::misc2::MyState as Misc2State;
@@ -358,3 +360,22 @@ pub struct EnforceRentExempt<'info> {
     #[account(rent_exempt = enforce)]
     pub data: AccountInfo<'info>,
 }
+
+#[derive(Accounts)]
+pub struct InitDecreaseLamports<'info> {
+    #[account(init, payer = user, space = 1000)]
+    pub data: AccountInfo<'info>,
+    #[account(mut)]
+    pub user: Signer<'info>,
+    pub system_program: Program<'info, System>
+}
+
+#[derive(Accounts)]
+pub struct InitIfNeededChecksRentExemption<'info> {
+    #[account(init_if_needed, payer = user, space = 1000)]
+    pub data: AccountInfo<'info>,
+    #[account(mut)]
+    pub user: Signer<'info>,
+    pub system_program: Program<'info, System>
+}
+
