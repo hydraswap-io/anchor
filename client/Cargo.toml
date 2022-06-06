@@ -12,7 +12,7 @@ debug = []
 [dependencies]
 anchor-lang = { path = "../lang", version = "0.20.1" }
 anyhow = "1.0.32"
-regex = "1.4.5"
+regex = "1.5.5"
 serde = { version = "1.0.122", features = ["derive"] }
 solana-client = "1.7.2"
 solana-sdk = "1.7.2"
